@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: kube-config
+  template:
+    metadata:
+      name: kube-config
+      labels:
+        name: kube-config
+    spec:
+      containers:
+        -  name: kube-config
+           image: 747subhasish/spring-kube:4.0
+           ports:
+            - containerPort: 8080
+           env:
+             - name: message
+               valueFrom:
+                 configMapKeyRef:
+                   name: spring-kube
+                   key: message
+
+
+
+
+
+
+
+
+
+
